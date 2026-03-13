@@ -9,7 +9,6 @@ async function run() {
         const pwd = core.getInput("password");
 
         const issue = github.context.payload.issue;
-        console.log(issue);
 
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -24,15 +23,15 @@ async function run() {
             to,
             subject: `Nouvelle issue ouverte: ${issue.title}`,
             text: `
-                titre: ${issue.title}
-                auteur: ${issue.user.login}
-                lien: ${issue.html_url}
-                
-                description: ${issue.body}
+            titre: ${issue.title}
+            auteur: ${issue.user.login}
+            lien: ${issue.html_url}
+            
+            description: ${issue.body}
             `
         });
         core.info("Email envoye avec succes !")
-        core.setOutput("date", issue.updated_at)
+        core.setOutput("date", issue.created_at)
     } catch (e) {
         core.setFailed(`echec: ${e.message}`)
     }

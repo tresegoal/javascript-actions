@@ -2,7 +2,7 @@ name: Mail issue
 
 on:
   issues:
-    types: [opened]
+    types: [opened, reopened]
 
 jobs:
   send-email:
@@ -15,8 +15,12 @@ jobs:
         run: npm ci
 
       - name: send email
+        id: sendmail
         uses: ./
         with:
           to: epicendolo@gmail.com
           from: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PWD }}
+
+      - name: affiche la date de l'issue
+        run: echo "la date de l'issue est ${{ steps.sendmail.outputs.date }}"
