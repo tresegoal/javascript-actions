@@ -1,7 +1,7 @@
 name: Mail issue
 
 on:
-  issue:
+  issues:
     types: [opened]
 
 jobs:
