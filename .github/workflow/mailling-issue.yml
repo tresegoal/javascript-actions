@@ -1,0 +1,22 @@
+name: Mail issue
+
+on:
+  issue:
+    types: [opened]
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
+
+      - name: install dependencies
+        run: npm ci
+
+      - name: send email
+        uses: ./
+        with:
+          to: epicendolo@gmail.com
+          from: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PWD }}

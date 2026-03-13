@@ -1,0 +1,24 @@
+name: Email on new issue
+description: Cette action permet d'envoyer un courriel lorsque qu'une nouvelle issue est ouverte sur un repository
+inputs:
+  to:
+    description: adresse email du destinataire
+    required: true
+  from:
+    description: adresse email de l'expediteur
+    required: true
+  subjet:
+    description: l'ojet du mail
+    required: false
+    default: nouvelle issue ouverte dans le repository
+  password:
+    description: mot de passe de l'email
+    required: true
+
+outputs:
+  date:
+    description: date de l'ouverture de l'issue
+
+runs:
+  using: node20
+  main: ./index.js
